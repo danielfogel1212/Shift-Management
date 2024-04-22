@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <title>Admin Page</title>
+    <style>
+        body {
+            direction: ltr;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: white;
+        }
+
+        .container {
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-x: hidden; /* Hide horizontal overflow */
+        }
+
+        #week-range {
+            display: block;
+            text-align: center;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        .week-navigation {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #previous-week-button,
+        #next-week-button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        #previous-week-button:hover,
+        #next-week-button:hover {
+            background-color: #0056b3;
+        }
+
+        table {
+            width: 100%;
+            max-width: 100vw;
+            border-collapse: collapse;
+            border: 2px solid #333;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+            font-size: 15px;
+            color: black
+        }
+
+        th {
+            background-color: #007bff;
+            color:black
+        }
+
+        td:first-child {
+            font-weight: bold;
+            text-align: right;
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: white
+        }
+
+        tbody tr:nth-child(even) {
+            background: white;
+        }
+
+        .yellow {
+            color: yellow;
+        }
+        @media (max-width: 600px) {
+    table {
+        background: white;
+        font-size: 10px;
+    }
+    th, td {
+        border: 1px solid #ccc;
+        padding: 2px;
+        text-align: center;
+        font-size: 9px;
+    }
+    .btn.btn-primary {
+        font-size: 9px;
+    }
+    .btn.btn-secondary{
+        
+        font-size:9px;
+    
+    }
+}
+
+            #previous-week-button, #next-week-button {
+                font-size: 14px;
+            }
+            </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="sb-nav-fixed">
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#"><img src="enter.jpg" width=50 height=50></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="show.html">Shift Board</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="index.html">Shift Filling</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="exit.html">Exit</a>
+          </li> 
+        </ul>
+      </div>
+    </div>
+  </nav>
+    <div id="layoutSidenav_content">
+        <main>
+            <div class="container-fluid px-4">
+                <h1 class="mt-4">Main Board</h1>
+                <ol class="breadcrumb mb-4">
+                    <li class="breadcrumb-item active">Main Board</li>
+                </ol>
+                <div class="row" style="direction: ltr;">
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-primary text-white mb-4">
+                            <div class="card-body">Add Users</div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="#">View Details</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-warning text-white mb-4">
+                            <div class="card-body">View Employees</div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="#">View Details</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-success text-white mb-4">
+                            <div class="card-body">This Week's Shifts</div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="#">View Details</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-md-6">
+                        <div class="card bg-danger text-white mb-4">
+                            <div class="card-body">Reports</div>
+                            <div class="card-footer d-flex align-items-center justify-content-between">
+                                <a class="small text-white stretched-link" href="#">View Details</a>
+                                <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                <div class="card mb-4" style="direction: ltr;">
+                    <div class="card-header">
+                        <i class="fas fa-table me-1"></i>
+                        Employees Table
+                    </div>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <tr style="text-align: left;">
+                                   <td >Employee Name</td>
+                                   <td>Email</td>
+                                   <td>Role</td>
+                                   <td>Edit</td>
+
+
+                        
+                            </thead>
+                            
+                            <tbody id="users" style="direction: ltr;">
+                                <!-- Table content goes here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                  
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <!-- Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Firebase -->
+    <script type="module">
+       import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-app.js";
+import { getFirestore, where, collection, addDoc, getDoc, query, serverTimestamp ,limitToLast, orderBy, limit, startAfter, startAt, endAt, onSnapshot, doc, getDocs, deleteField, updateDoc, deleteDoc, setDoc } from 'https://www.gstatic.com/firebasejs/9.9.4/firebase-firestore.js';
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-auth.js";
+import { getDatabase, ref, set, onValue, onDisconnect } from "https://www.gstatic.com/firebasejs/9.9.4/firebase-database.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyB87m7IcXd1gqnSYZEBXqwpQIQbOItRwqY",
+  authDomain: "todos-e7e2f.firebaseapp.com",
+  databaseURL: "https://todos-e7e2f-default-rtdb.firebaseio.com",
+  projectId: "todos-e7e2f",
+  storageBucket: "todos-e7e2f.appspot.com",
+  messagingSenderId: "523425205783",
+  appId: "1:523425205783:web:6fd93bb6f354c361541652"
+};
+const app = initializeApp(firebaseConfig);
+const auth = getAuth();
+const db = getFirestore(app);
+let row = ''
+let currentUserUID =''
+let email = ''
+let oldDisplayName= ''
+let id = ''
+let role = ''
+        let currentDate = new Date(); // Define currentDate globally
+        onAuthStateChanged(auth,  async (user) => {
+    if (user) {
+        // Get the current user's ID
+        currentUserUID = user.uid;
+
+    
+        // You can use the currentUserUID here to do something
+        console.log("Current user's UID: ", currentUserUID);
+    } else {
+        window.location.href="login.html"
+    }
+});
+const usersTableBody = document.getElementById('users');
+const usersCollectionRef = collection(db, 'users');
+const userRows = {}; // Store references to existing rows by user ID
+
+try {
+    const unsubscribe = onSnapshot(usersCollectionRef, (querySnapshot) => {
+        // Clear existing rows
+        usersTableBody.innerHTML = '';
+
+        querySnapshot.forEach((doc) => {
+            const userData = doc.data();
+            const userId = doc.id;
+
+            // Create a new row for each user
+            const row = document.createElement('tr');
+            oldDisplayName = userData.displayName;
+            row.innerHTML = `
+                <td>${userData.displayName}</td>
+                <td>${userData.email}</td>
+                <td>${userData.role}</td>
+                <td>
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#${userId}" data-whatever="${userData.displayName}">Edit</button>
+                </td>
+            `;
+
+            // Append the row to the table body
+            usersTableBody.appendChild(row);
+
+            // Store reference to the new row
+            userRows[userId] = row;
+
+            // Create and append the modal for each user
+            const modalContent = `
+                <input type="hidden" class="form-control" id="old-${userId}" value="${userData.displayName}">
+                <div class="modal fade" id="${userId}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Edit User</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="form-group">
+                                        <label for="recipient-name" class="col-form-label">User Name</label>
+                                        <input type="text" class="form-control" id="recipient-name-${userId}" value="${userData.displayName}">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="recipient-email" class="col-form-label">Role</label>
+                                        <input type="text" class="form-control" id="recipient-role-${userId}" value="${userData.role}">
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" id="close${userId}" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" id="send-message-${userId}">Update Details</button>
+                               
+                            </div>
+                            <center>
+                            <div id="details${userId}"></div>
+                            <ceneter>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Append modal content to the document body
+            document.body.insertAdjacentHTML('beforeend', modalContent);
+        });
+    });
+} catch (error) {
+    console.error('Error fetching users:', error);
+}
+
+// Add event listener to the modal when it's fully shown
+$(document).on('show.bs.modal', '.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var recipient = button.data('whatever'); // Extract info from data-* attributes
+    var modal = $(this);
+    modal.find('.modal-title').text(recipient);
+
+    // Extract userId from modal ID
+    var userId = modal.attr('id');
+
+    // Add event listener to the "Send message" button inside the modal
+    modal.find(`#send-message-${userId}`).on('click', function() {
+        const newDisplayName = document.getElementById(`recipient-name-${userId}`).value;
+        const newRole = document.getElementById(`recipient-role-${userId}`).value;
+        const oldDisplayName = document.getElementById(`old-${userId}`).value;
+        updateUserData(userId, newDisplayName, newRole, oldDisplayName);
+    });
+    
+});
+
+
+// Add event listener to the modal when it's fully show
+
+
+
+// Function to update user data
+async function updateUserData(userId, newDisplayName, newRole, oldDisplayName) {
+
+      
+    try {
+    // Update the user document in Firestore
+    await updateDoc(doc(db, 'users', userId), {
+        displayName: newDisplayName,
+        role: newRole
+    });
+    
+    const successDiv = document.getElementById(`details${userId}`);
+    successDiv.innerHTML = `<div class="alert alert-success" role="alert">Details updated successfully</div>`;
+    
+    // Hide the success message after 5 minutes (300,000 milliseconds)
+    setTimeout(() => {
+        successDiv.innerHTML = ''; // Remove the success message
+    }, 3000); // 5 minutes in milliseconds
+} catch (error) {
+    console.error('Error updating user data:', error);
+}
+
+    // Update shifts collection with the new display name
+    const querySnapshot = await getDocs(query(collection(db, 'shifts'), where('userId', '==', userId)));
+
+    if (!querySnapshot.empty) {
+      
+        querySnapshot.forEach(async (doc) => {
+            try {
+                // Update each document
+                await updateDoc(doc.ref, {
+                    displayName: newDisplayName
+                });
+            
+                console.log('Document updated successfully');
+            } catch (error) {
+                console.error('Error updating document:', error);
+            }
+        });
+    }
+
+}
+
+    </script>
+
+</body>
+</html>
